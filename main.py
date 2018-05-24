@@ -15,21 +15,24 @@ def recognize_melody(audiofile):
 
 def main(audiofile):
 	rate, signal = read(audiofile)
-	recognized = [x for x in recognize_speech(audiofile) if x[1] != float(0)]
+	recognized = [x for x in recognize_speech(audiofile) if x[1] == float(1)]
 	inds = []
+	count = 0
 	for ind, x in enumerate(recognized[:-1]):
-		for y in np.arange(int(x[0]), int(recognized[ind+1][0])):
+		curr, future = int(recognized[ind+count][0]), int(recognized[ind+1+count][0])
+		print(curr, future)
+		for y in np.arange(curr, future):
 			inds.append(y)
-	print(len(inds), len(signal))
-	speech = np.array([signal[ind] for ind in inds])
-	write('middleman.wav', 48100, speech)
+		count += 1
+	# speech = np.array([signal[ind] for ind in inds])
+	# write('middleman.wav', 48100, speech)
 	# middlerate, middlesignal = read('middleman.wav')
 
-	song = AudioSegment.from_wav('middleman.wav')
+	# song = AudioSegment.from_wav('middleman.wav')
 	# print(len(speech), len(recognized)) # (1580, 27409)
 
 	# pan the sound 15% to the right
-	panned_right = song.pan(+0.15)
+	# panned_right = song.pan(+0.15)
 
 	# pan the sound 50% to the left
 	# panned_left = song.pan(-0.50)

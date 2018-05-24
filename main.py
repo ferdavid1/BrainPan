@@ -19,13 +19,16 @@ def main(audiofile):
 	inds = []
 	count = 0
 	for ind, x in enumerate(recognized[:-1]):
-		curr, future = int(recognized[ind+count][0]), int(recognized[ind+1+count][0])
+		try:
+			curr, future = int(recognized[ind+count][0]), int(recognized[ind+1+count][0])
+		except IndexError:
+			break
 		print(curr, future)
 		for y in np.arange(curr, future):
 			inds.append(y)
 		count += 1
-	# speech = np.array([signal[ind] for ind in inds])
-	# write('middleman.wav', 48100, speech)
+	speech = np.array([signal[ind] for ind in inds])
+	write('middleman.wav', 48100, speech)
 	# middlerate, middlesignal = read('middleman.wav')
 
 	# song = AudioSegment.from_wav('middleman.wav')

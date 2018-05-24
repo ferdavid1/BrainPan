@@ -15,12 +15,12 @@ def recognize_melody(audiofile):
 
 def main(audiofile):
 	rate, signal = read(audiofile)
-	recognized = recognize_speech(audiofile)
+	recognized = [x for x in recognize_speech(audiofile) if x[1] != float(0)]
 	inds = []
 	for ind, x in enumerate(recognized[:-1]):
 		for y in np.arange(int(x[0]), int(recognized[ind+1][0])):
 			inds.append(y)
-	print(len(inds))
+	print(len(inds), len(signal))
 	speech = np.array([signal[ind] for ind in inds])
 	write('middleman.wav', 48100, speech)
 	# middlerate, middlesignal = read('middleman.wav')

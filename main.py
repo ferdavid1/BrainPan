@@ -27,8 +27,9 @@ def main(audiofile):
 		for y in np.arange(curr, future):
 			inds.append(y)
 		count += 1
+	print([x[0] for x in recognized])
 	speech = np.array([signal[ind] for ind in inds])
-	write('middleman.wav', 48100, speech)
+	# write('middleman.wav', 48100, speech)
 	# middlerate, middlesignal = read('middleman.wav')
 
 	# song = AudioSegment.from_wav('middleman.wav')

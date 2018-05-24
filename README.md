@@ -8,3 +8,7 @@ Panning audio to the ear with the relevant ear advantage according to Speech vs 
 
 # Song
 BADBADNOTGOOD - Time Moves Slow 
+
+# Misc.
+- Must be run using Python2
+- Requirements: PyDub, Numpy
